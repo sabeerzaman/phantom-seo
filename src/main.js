@@ -25,3 +25,10 @@ require.config({
 		}
 	}
 });
+
+require(['jquery', 'router'], function( $, Router ) {
+	$(function() {
+		var storeApp = new Router();
+		storeApp.start();
+	});
+});
