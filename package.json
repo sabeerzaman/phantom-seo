@@ -1,0 +1,11 @@
+{
+  "name": "phantom-seo",
+  "version": "0.0.0",
+  "description": "A test Node server to implement Google's \"AJAX crawler\" SEO technique",
+  "author": "Sabeer Zaman",
+  "license": "BSD",
+  "dependencies": {
+    "express": "~3.3.4",
+    "phantomjs": "~1.9.1-0"
+  }
+}
