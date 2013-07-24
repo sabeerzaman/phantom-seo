@@ -1,7 +1,7 @@
 // Based on phantom-server.js from: 
 //	http://backbonetutorials.com/seo-for-single-page-apps/
 
-var JS_LATENCY_TIME_LIMIT = 300,
+var JS_LATENCY_TIME_LIMIT = 10000,
 	TOTAL_TIME_LIMIT = 60000;
 
 var page = require('webpage').create(),

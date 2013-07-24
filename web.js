@@ -25,10 +25,10 @@ var getContent = function(url, callback) {
 };
 
 var respond = function(req, res) {
-	var fragment = req.params[0].charAt(0) == '/' ? req.params[0].slice(1) : req.params[0];
+	var path = req.path + '#!' + ( req.query.hashbang ? req.query.hashbang : '' );
 
 	// Because we use [P] in htaccess we have access to this header
-	var url = 'http://' + req.headers['x-forwarded-host'] + '#!' + fragment;
+	var url = 'http://' + req.headers['x-forwarded-host'] + path;
 
 	console.log( 'URL = ' + url );
 	getContent(url, function(content) {
