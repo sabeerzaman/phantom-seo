@@ -25,7 +25,7 @@ var getContent = function(url, callback) {
 };
 
 var respond = function(req, res) {
-	var path = req.path + '#!' + ( req.query.hashbang ? req.query.hashbang : '' );
+	var path = req.path + '#!' + decodeURIComponent( req.query.hashbang ? req.query.hashbang : '' );
 
 	// Because we use [P] in htaccess we have access to this header
 	var url = 'http://' + req.headers['x-forwarded-host'] + path;
