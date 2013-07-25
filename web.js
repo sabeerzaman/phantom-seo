@@ -57,20 +57,27 @@ var createFilePath = function( fragment ) {
 
 var respond = function(req, res) {
 	var fragment = decodeURIComponent( req.query.hashbang ? req.query.hashbang : '' ),
-		path = req.path + '#!' + fragment;
-
+		path = req.path + '#!' + fragment,
+		forceRender = req.query.rerender && req.query.rerender !== 'false';
 	// Because we use [P] in htaccess we have access to this header
 	var url = 'http://' + req.headers['x-forwarded-host'] + path;
 
 	console.log( 'URL = ' + url );
 
-	if ( fileExists( fragment ) ) {
+	if ( !forceRender && fileExists( fragment ) ) {
 		console.log( 'File already pre-rendered - sending it now' );
 		fs.readFile( createFilePath( fragment ), { encoding: 'utf8' },
 			function( err, data ) {
 				if ( err ) {
+					var errStr = '<pre>' + JSON.stringify( err, undefined, 2 ) + '</pre>';
 					console.log( 'Error reading file: ' );
-					console.log( err );
+					console.log( errStr );
+
+					res.writeHead( 500, {
+						'Content-Length': errStr.length,
+						'Content-Type': 'text/html'
+					});
+					res.end( errStr );
 				}
 				else {
 					console.log( 'File contents: ' );
