@@ -2,7 +2,7 @@
 //	http://backbonetutorials.com/seo-for-single-page-apps/
 
 var JS_LATENCY_TIME_LIMIT = 10000,
-	TOTAL_TIME_LIMIT = 60000;
+	TOTAL_TIME_LIMIT = 30000;
 
 var page = require('webpage').create(),
 	system = require('system'),
@@ -12,6 +12,7 @@ var page = require('webpage').create(),
 	responseCount = 0,
 	requestIds = [],
 	startTime = new Date().getTime(),
+	checkCompleteInterval,
 	DEBUG_MODE = system.args[2] === '-debug';
 
 page.onResourceReceived = function(response) {
@@ -38,12 +39,20 @@ page.onResourceRequested = function(request) {
 	}
 };
 
-// Open the page 
-page.open(system.args[1], function() {});
+if ( DEBUG_MODE )
+	page.onConsoleMessage = function (msg) {
+		console.log( msg );
+	};
+
 var checkComplete = function() {
-	// We don't allow it to take longer than 5 seconds but 
-	// don't return until all requests are finished 
-	if ((new Date().getTime() - lastReceived > JS_LATENCY_TIME_LIMIT && requestCount === responseCount) || new Date().getTime() - startTime > TOTAL_TIME_LIMIT) {
+	var isJsRenderComplete = page.evaluate(function() {
+		var body = document.getElementsByTagName('body')[0],
+			bodyClassNames = body.className.split(" ");
+		return bodyClassNames.indexOf( 'render-complete' ) !== -1;
+	});
+
+	if ( isJsRenderComplete ||	new Date().getTime() - startTime > TOTAL_TIME_LIMIT )
+	{
 		clearInterval(checkCompleteInterval);
 		console.log(page.content);
 		if ( DEBUG_MODE ) {
@@ -55,5 +64,14 @@ var checkComplete = function() {
 		phantom.exit();
 	}
 };
-// Let us check to see if the page is finished rendering 
-var checkCompleteInterval = setInterval(checkComplete, 1);
+
+// Open the page 
+page.open(system.args[1], function( status ) {
+	if ( status === 'success' ) {
+		// Let us check to see if the page is finished rendering 
+		checkCompleteInterval = setInterval(checkComplete, 1);
+	}
+	else {
+		console.log( 'There was an error opening page: ' + status );
+	}
+});

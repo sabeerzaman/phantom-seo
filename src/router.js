@@ -1,4 +1,4 @@
-define([ 'backbone', 'models/blogpost', 'views/blogpost' ], function( Backbone, Post, PostView ) {
+define([ 'backbone', 'jquery', 'models/blogpost', 'views/blogpost' ], function( Backbone, $, Post, PostView ) {
 	var Router = Backbone.Router.extend({
 		routes: {
 			'': 'index',
@@ -19,6 +19,7 @@ define([ 'backbone', 'models/blogpost', 'views/blogpost' ], function( Backbone, 
 
 			var view = new PostView({ model: post });
 			view.render().$el.appendTo( '.container' );
+			$('body').addClass('render-complete');
 		},
 
 		start: function() {
