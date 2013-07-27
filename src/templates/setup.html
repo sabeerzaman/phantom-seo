@@ -1,0 +1,29 @@
+<article>
+	<header>
+		<h1>What was used to make this site "crawlable"?</h1>
+	</header>
+
+	<dl>
+		<dt><a href="http://backbonejs.org/" target="_blank">BackboneJS:</a></dt>
+		<dd>
+			For routing between the pages and rendering the content on the front end.</dd>
+		<dt>
+			<a href="http://phantomjs.org/" target="_blank">PhantomJS:</a>
+		</dt>
+		<dd>
+			A "headless web browser" that can be run programmatically to fetch HTML pages, and run any JavaScript required to render it fully.
+		</dd>
+		<dt>
+			<a href="http://nodejs.org/" target="_blank">NodeJS:</a>
+		</dt>
+		<dd>
+			Platform able to run JavaScript on the server side, which is used here to handle any "escaped fragment" requests made by the crawler to run use PhantomJS to fully render and return the HTML pages.
+		</dd>
+		<dt>
+			<a href="http://www.apache.org/" target="_blank">Apache Web server:</a>
+		</dt>
+		<dd>
+			Mainly to serve up the single HTML page and JavaScript required. Additionally, used to proxy "escaped fragment" requests to the Node server running on the same machine.
+		</dd>
+	</dl>
+</article>

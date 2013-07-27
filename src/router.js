@@ -1,25 +1,33 @@
-define([ 'backbone', 'jquery', 'models/blogpost', 'views/blogpost' ], function( Backbone, $, Post, PostView ) {
+define([ 'backbone', 'jquery', 'text!templates/home.html', 'text!templates/about.html', 'text!templates/setup.html', 'text!templates/references.html' ], function( Backbone, $, tmplHome, tmplAbout, tmplSetup, tmplReferences ) {
 	var Router = Backbone.Router.extend({
 		routes: {
-			'': 'index',
-			'!main': 'main'
+			'': 'home',
+			'!home': 'home',
+			'!about': 'about',
+			'!setup': 'setup',
+			'!references': 'references'
 		},
 
-		index: function() {
-			this.navigate( '!main', { trigger: true, replace: true } );
+		tmpl: {
+			'home': tmplHome,
+			'about': tmplAbout,
+			'setup': tmplSetup,
+			'references': tmplReferences
 		},
 
-		main: function() {
-			var post = new Post({
-				timestamp: new Date(),
-				title: 'My First Post!',
-				body: 'This is my very first post!',
-				author: 'Sabeer Zaman'
-			});
+		initialize: function() {
+			this.on( 'route', this.updateNav );
+			this.on( 'route', this.renderPage );
+		},
 
-			var view = new PostView({ model: post });
-			view.render().$el.appendTo( '.container' );
-			$('body').addClass('render-complete');
+		updateNav: function( route ) {
+			$( 'li.active', '.nav' ).removeClass( 'active' );
+			$( 'a[href*="'+route+'"]' ).parent( 'li' ).addClass( 'active' );
+		},
+
+		renderPage: function( route ) {
+			$( '#content' ).html( this.tmpl[ route ] );
+			$( 'body' ).addClass( 'render-complete' );
 		},
 
 		start: function() {
