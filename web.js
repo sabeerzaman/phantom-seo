@@ -1,5 +1,6 @@
 // Express is our web server that can handle request
-var express = require('express'),
+var PORT = 3000,
+	express = require('express'),
 	app = express(),
 	fs = require( 'fs' ),
 	htmlLocation = 'html_snapshots';
@@ -104,5 +105,5 @@ var respond = function(req, res) {
 	}
 };
 app.get(/(.*)/, respond);
-app.listen(3000);
+app.listen(PORT);
 console.log( 'Listening on port 3000' );
