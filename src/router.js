@@ -1,7 +1,7 @@
 define([ 'backbone', 'jquery', 'text!templates/home.html', 'text!templates/about.html', 'text!templates/setup.html', 'text!templates/references.html' ], function( Backbone, $, tmplHome, tmplAbout, tmplSetup, tmplReferences ) {
 	var Router = Backbone.Router.extend({
 		routes: {
-			'': 'home',
+			'(!)': 'home',
 			'!home': 'home',
 			'!about': 'about',
 			'!setup': 'setup',
@@ -18,6 +18,10 @@ define([ 'backbone', 'jquery', 'text!templates/home.html', 'text!templates/about
 		initialize: function() {
 			this.on( 'route', this.updateNav );
 			this.on( 'route', this.renderPage );
+		},
+
+		index: function() {
+			this.navigate( '!home', { trigger: true }, { replace: true } );
 		},
 
 		updateNav: function( route ) {
