@@ -1,12 +1,19 @@
 {
-  "name": "phantom-seo",
-  "version": "0.0.0",
-  "description": "A test Node server to implement Google's \"AJAX crawler\" SEO technique",
-  "author": "Sabeer Zaman",
-  "license": "BSD",
-  "dependencies": {
-    "express": "~3.3.4",
-    "phantomjs": "~1.9.1-0",
-    "requirejs": "~2.1.8"
-  }
+	"name": "phantom-seo",
+	"version": "0.0.0",
+	"description": "A test Node server to implement Google's \"AJAX crawler\" SEO technique",
+	"author": "Sabeer Zaman",
+	"license": "BSD",
+	"dependencies": {
+		"express": "~3.3.4",
+		"phantomjs": "~1.9.1-0",
+		"requirejs": "~2.1.8"
+	},
+	"devDependencies": {
+		"grunt": "~0.4.1",
+		"grunt-contrib-jshint": "~0.6.0",
+		"grunt-contrib-uglify": "~0.2.2",
+		"grunt-contrib-jasmine": "~0.5.1",
+		"grunt-contrib-watch": "~0.4.4"
+	}
 }
