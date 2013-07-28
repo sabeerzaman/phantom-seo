@@ -4,3 +4,6 @@ ss-*.png
 html_snapshots/
 build.bat
 sync.bat
+./node-server/out.log
+./node-server/err.log
+./node-server/forever.log
