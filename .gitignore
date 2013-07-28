@@ -2,3 +2,5 @@ access_log
 error_log
 ss-*.png
 html_snapshots/
+build.bat
+sync.bat
