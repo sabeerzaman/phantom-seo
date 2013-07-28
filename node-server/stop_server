@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd /var/node-server
+# Invoke the Forever module (to START our Node.js server).
+./node_modules/forever/bin/forever stop web.js
