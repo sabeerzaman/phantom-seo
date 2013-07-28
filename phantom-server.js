@@ -1,5 +1,6 @@
-// Based on phantom-server.js from: 
-//	http://backbonetutorials.com/seo-for-single-page-apps/
+/*global phantom*/
+
+// Based on phantom-server.js from: http://backbonetutorials.com/seo-for-single-page-apps/
 
 var JS_LATENCY_TIME_LIMIT = 10000,
 	TOTAL_TIME_LIMIT = 30000;

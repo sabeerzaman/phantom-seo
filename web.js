@@ -24,11 +24,16 @@ var getContent = function(url, callback) {
 	});
 };
 
+var createFilePath = function( fragment ) {
+	return htmlLocation + '/' + ( fragment || 'index' ) + '.html';
+};
+
 var saveToFile = function( fragment, content ) {
 	var path = createFilePath( fragment ),
 		pathParts = path.split( /[\\\/]/g ),
 		filename = encodeURIComponent( pathParts.pop() ).replace( /[^\w.]/g, '-' ),
-		dirPath = pathParts.join( '/' );
+		dirPath = pathParts.join( '/' ),
+		htmlFile;
 
 	if ( !fs.existsSync( dirPath ) ) {
 		var dir = '';
@@ -50,10 +55,6 @@ var saveToFile = function( fragment, content ) {
 
 var fileExists = function( fragment ) {
 	return fs.existsSync( createFilePath( fragment ) );
-};
-
-var createFilePath = function( fragment ) {
-	return htmlLocation + '/' + ( fragment || 'index' ) + '.html';
 };
 
 var respond = function(req, res) {
