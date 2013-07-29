@@ -8,6 +8,8 @@
     "express": "~3.3.4",
     "phantomjs": "~1.9.1-0",
     "requirejs": "~2.1.8",
-    "forever": "~0.10.8"
+    "forever": "~0.10.8",
+    "mongoose": "~3.6.15",
+    "underscore": "~1.5.1"
   }
 }
