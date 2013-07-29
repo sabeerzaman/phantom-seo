@@ -4,7 +4,11 @@ module.exports = function( grunt ) {
 			client: {
 				src: 'src/**/*.js',
 				options: {
-					specs: 'specs/**/*.spec.js'
+					specs: 'specs/**/*.spec.js',
+					junit: {
+						path: './',
+						consolidate: true
+					}
 				}
 			}
 		},
