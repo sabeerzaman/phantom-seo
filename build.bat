@@ -27,7 +27,7 @@ REM	exit /b %ERRORLEVEL%
 
 echo.
 echo "Syncing public files with remote instance..."
-rsync -e "ssh -i %sshkey% -o StrictHostKeychecking=no" -avz --exclude /node-server --exclude .git --exclude /specs --exclude /node_modules --exclude Gruntfile.js --exclude package.json --exclude .gitignore --exclude build.bat --exclude sync.bat . ubuntu@%remote%:/var/www/
+rsync -e "ssh -i %sshkey% -o StrictHostKeychecking=no" -avz --exclude /node-server --exclude .git --exclude /specs --exclude /node_modules --exclude Gruntfile.js --exclude package.json --exclude .gitignore --exclude build.bat --exclude sync.bat --exclude 'TEST*.xml' --exclude access_log --exclude error_log . ubuntu@%remote%:/var/www/
 ssh -i %sshkey% -o StrictHostKeychecking=no ubuntu@%remote% "sudo chmod -R 0755 /var/www"
 
 IF %ERRORLEVEL% EQU 0 (
