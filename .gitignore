@@ -2,7 +2,6 @@ access_log
 error_log
 ss-*.png
 html_snapshots/
-build.bat
 sync.bat
 ./node-server/out.log
 ./node-server/err.log
